@@ -1,4 +1,4 @@
-import Layout from "../../components/Layout"
+import Page from "../../components/Page"
 import Router, { useRouter } from "next/router"
 import gql from "graphql-tag"
 import { useQuery, useMutation } from "@apollo/client"
@@ -75,7 +75,7 @@ function Post() {
 
   const authorName = data.post.author ? data.post.author.name : "Unknown author"
   return (
-    <Layout>
+    <Page>
       <div>
         <h2>{title}</h2>
         <p>By {authorName}</p>
@@ -107,28 +107,7 @@ function Post() {
           Delete
         </button>
       </div>
-      <style jsx>{`
-        .page {
-          background: white;
-          padding: 2rem;
-        }
-
-        .actions {
-          margin-top: 2rem;
-        }
-
-        button {
-          background: #ececec;
-          border: 0;
-          border-radius: 0.125rem;
-          padding: 1rem 2rem;
-        }
-
-        button + button {
-          margin-left: 1rem;
-        }
-      `}</style>
-    </Layout>
+    </Page>
   )
 }
 

@@ -1,4 +1,4 @@
-import Layout from "../components/Layout"
+import Page from "../components/Page"
 import Link from "next/link"
 import gql from "graphql-tag"
 import { useQuery } from "@apollo/client"
@@ -24,14 +24,6 @@ const Post = ({ post }) => (
       <h2>{post.title}</h2>
       <small>By {post.author.name}</small>
       <p>{post.content}</p>
-      <style jsx>{`
-        a {
-          text-decoration: none;
-          color: inherit;
-          padding: 2rem;
-          display: block;
-        }
-      `}</style>
     </a>
   </Link>
 )
@@ -49,7 +41,7 @@ const Blog = () => {
   }
 
   return (
-    <Layout>
+    <Page>
       <div className="page">
         <h1>My Blog</h1>
         <main>
@@ -60,21 +52,7 @@ const Blog = () => {
           ))}
         </main>
       </div>
-      <style jsx>{`
-        .post {
-          background: white;
-          transition: box-shadow 0.1s ease-in;
-        }
-
-        .post:hover {
-          box-shadow: 1px 1px 3px #aaa;
-        }
-
-        .post + .post {
-          margin-top: 2rem;
-        }
-      `}</style>
-    </Layout>
+    </Page>
   )
 }
 

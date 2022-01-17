@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import Layout from "../components/Layout"
+import Page from "../components/Page"
 import Router, { useRouter } from "next/router"
 import gql from "graphql-tag"
 import { useMutation } from "@apollo/client"
@@ -21,7 +21,7 @@ function Signup(props) {
   const [signup] = useMutation(SignupMutation)
 
   return (
-    <Layout>
+    <Page>
       <div>
         <form
           onSubmit={async e => {
@@ -57,33 +57,7 @@ function Signup(props) {
           </a>
         </form>
       </div>
-      <style jsx>{`
-        .page {
-          background: white;
-          padding: 3rem;
-          display: flex;
-          justify-content: center;
-        }
-
-        input[type="text"] {
-          width: 100%;
-          padding: 0.5rem;
-          margin: 0.5rem 0;
-          border-radius: 0.25rem;
-          border: 0.125rem solid rgba(0, 0, 0, 0.2);
-        }
-
-        input[type="submit"] {
-          background: #ececec;
-          border: 0;
-          padding: 1rem 2rem;
-        }
-
-        .back {
-          margin-left: 1rem;
-        }
-      `}</style>
-    </Layout>
+    </Page>
   )
 }
 
