@@ -35,7 +35,6 @@ export default NextAuth({
       },
       async authorize(credentials) {
         try {
-          console.log(1)
           let maybeUser = await prisma.user.findFirst({
             where: {
               email: credentials.email,
@@ -43,12 +42,11 @@ export default NextAuth({
             select: {
               id: true,
               email: true,
-              // password: true,
+              password: true,
               name: true,
-              // role: true,
+              role: true,
             },
           });
-          console.log(maybeUser)
 
           if (!maybeUser) {
             if (!credentials.password || !credentials.email) {
@@ -63,18 +61,17 @@ export default NextAuth({
               select: {
                 id: true,
                 email: true,
-                // password: true,
+                password: true,
                 name: true,
-                // role: true,
+                role: true,
               },
             });
           } else {
             const isValid = await verifyPassword(
               credentials.password,
-              credentials.password
-              // maybeUser.password
+              maybeUser.password
             );
-            console.log(isValid)
+
             if (!isValid) {
               throw new Error("Invalid Credentials");
             }
@@ -84,14 +81,14 @@ export default NextAuth({
             id: maybeUser.id,
             email: maybeUser.email,
             name: maybeUser.name,
-            // role: maybeUser.role,
+            role: maybeUser.role,
           };
         } catch (error) {
           console.log(error);
           throw error;
         }
       },
-    }),
+    })
   ],
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
