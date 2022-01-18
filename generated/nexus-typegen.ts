@@ -46,18 +46,18 @@ export interface NexusGenObjects {
   Mutation: {};
   Post: { // root type
     content?: string | null; // String
-    id?: number | null; // Int
+    id?: string | null; // String
     published?: boolean | null; // Boolean
     title?: string | null; // String
   }
   Profile: { // root type
     bio?: string | null; // String
-    id: number; // Int!
+    id: string; // String!
   }
   Query: {};
   User: { // root type
     email?: string | null; // String
-    id?: number | null; // Int
+    id?: string | null; // String
     name?: string | null; // String
     password?: string | null; // String
     role?: string | null; // String
@@ -85,13 +85,13 @@ export interface NexusGenFieldTypes {
   Post: { // field return type
     author: NexusGenRootTypes['User'] | null; // User
     content: string | null; // String
-    id: number | null; // Int
+    id: string | null; // String
     published: boolean | null; // Boolean
     title: string | null; // String
   }
   Profile: { // field return type
     bio: string | null; // String
-    id: number; // Int!
+    id: string; // String!
     user: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
@@ -102,7 +102,7 @@ export interface NexusGenFieldTypes {
   }
   User: { // field return type
     email: string | null; // String
-    id: number | null; // Int
+    id: string | null; // String
     name: string | null; // String
     password: string | null; // String
     posts: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
@@ -122,13 +122,13 @@ export interface NexusGenFieldTypeNames {
   Post: { // field return type name
     author: 'User'
     content: 'String'
-    id: 'Int'
+    id: 'String'
     published: 'Boolean'
     title: 'String'
   }
   Profile: { // field return type name
     bio: 'String'
-    id: 'Int'
+    id: 'String'
     user: 'User'
   }
   Query: { // field return type name
@@ -139,7 +139,7 @@ export interface NexusGenFieldTypeNames {
   }
   User: { // field return type name
     email: 'String'
-    id: 'Int'
+    id: 'String'
     name: 'String'
     password: 'String'
     posts: 'Post'
