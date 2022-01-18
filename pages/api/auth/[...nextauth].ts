@@ -9,9 +9,9 @@ import prisma from '../../../lib/prisma'
 export default NextAuth({
   adapter: PrismaAdapter(prisma),
   secret: process.env.NEXTAUTH_SECRET,
-  session: {
-    jwt: true,
-  },
+  // session: {
+  //   jwt: true,
+  // },
   pages: {
     signIn: "/sign-in",
     // signOut: "/auth/logout",
