@@ -40,13 +40,13 @@ export default NextAuth({
             where: {
               email: credentials.email,
             },
-            // select: {
-            //   id: true,
-            //   email: true,
-            //   password: true,
-            //   name: true,
-            //   role: true,
-            // },
+            select: {
+              id: true,
+              email: true,
+              password: true,
+              name: true,
+              role: true,
+            },
           });
           console.log(maybeUser)
 

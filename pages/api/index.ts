@@ -21,6 +21,8 @@ const User = objectType({
     t.int('id')
     t.string('name')
     t.string('email')
+    t.string('password')
+    t.string('role')
     t.list.field('posts', {
       type: 'Post',
       resolve: (parent) =>
