@@ -43,9 +43,9 @@ export default NextAuth({
             select: {
               id: true,
               email: true,
-              password: true,
+              // password: true,
               name: true,
-              role: true,
+              // role: true,
             },
           });
           console.log(maybeUser)
@@ -63,15 +63,16 @@ export default NextAuth({
               select: {
                 id: true,
                 email: true,
-                password: true,
+                // password: true,
                 name: true,
-                role: true,
+                // role: true,
               },
             });
           } else {
             const isValid = await verifyPassword(
               credentials.password,
-              maybeUser.password
+              credentials.password
+              // maybeUser.password
             );
             console.log(isValid)
             if (!isValid) {
@@ -83,7 +84,7 @@ export default NextAuth({
             id: maybeUser.id,
             email: maybeUser.email,
             name: maybeUser.name,
-            role: maybeUser.role,
+            // role: maybeUser.role,
           };
         } catch (error) {
           console.log(error);
