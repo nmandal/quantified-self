@@ -35,6 +35,7 @@ export default NextAuth({
       },
       async authorize(credentials) {
         try {
+          console.log(1)
           let maybeUser = await prisma.user.findFirst({
             where: {
               email: credentials.email,
@@ -42,11 +43,12 @@ export default NextAuth({
             select: {
               id: true,
               email: true,
-              password: true,
+              // password: true,
               name: true,
               role: true,
             },
           });
+          console.log(maybeUser)
 
           if (!maybeUser) {
             if (!credentials.password || !credentials.email) {
@@ -71,7 +73,7 @@ export default NextAuth({
               credentials.password,
               maybeUser.password
             );
-
+            console.log(isValid)
             if (!isValid) {
               throw new Error("Invalid Credentials");
             }
@@ -87,60 +89,6 @@ export default NextAuth({
           console.log(error);
           throw error;
         }
-      },
-    }),
-    CredentialsProvider({
-      id: "admin-login",
-      name: "Administrator Login",
-      credentials: {
-        email: {
-          label: "Email Address",
-          type: "email",
-          placeholder: "john.doe@example.com",
-        },
-        password: {
-          label: "Password",
-          type: "password",
-          placeholder: "Your super secure password",
-        },
-      },
-      async authorize(credentials) {
-        let maybeUser = await prisma.user.findFirst({
-          where: {
-            email: credentials.email,
-          },
-          select: {
-            id: true,
-            email: true,
-            password: true,
-            name: true,
-            role: true,
-          },
-        });
-
-        if (!maybeUser) {
-          throw new Error("Unauthorized.");
-        }
-
-        if (maybeUser?.role !== "admin") {
-          throw new Error("Unauthorized.");
-        }
-
-        const isValid = await verifyPassword(
-          credentials.password,
-          maybeUser.password
-        );
-
-        if (!isValid) {
-          throw new Error("Invalid Credentials");
-        }
-
-        return {
-          id: maybeUser.id,
-          email: maybeUser.email,
-          name: maybeUser.name,
-          role: maybeUser.role,
-        };
       },
     }),
   ],
