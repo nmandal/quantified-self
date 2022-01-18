@@ -10,10 +10,29 @@ import {
   stringArg,
 } from 'nexus'
 import path from 'path'
-import cors from 'micro-cors'
+import cors from 'micro-cors' 
 import prisma from '../../lib/prisma'
 
 export const GQLDate = asNexusMethod(DateTimeResolver, 'date')
+
+
+const Profile = objectType({
+  name: 'Profile',
+  definition(t) {
+    t.nonNull.int('id')
+    t.string('bio')
+    t.field('user', {
+      type: 'User',
+      resolve: (parent) => {
+        return prisma.profile
+          .findUnique({
+            where: { id: parent.id || undefined },
+          })
+          .user()
+      },
+    })
+  },
+})
 
 const User = objectType({
   name: 'User',
@@ -32,6 +51,14 @@ const User = objectType({
           })
           .posts(),
     })
+    t.field('profile', {
+        type: 'Profile',
+        resolve: (parent) => {
+          return prisma.user.findUnique({
+            where: { id: parent.id }
+          }).profile()
+        }
+      })
   },
 })
 
@@ -158,6 +185,26 @@ const Mutation = objectType({
       },
     })
 
+    t.field('addProfileForUser', {
+        type: 'Profile',
+        args: {
+          email: stringArg(),
+          bio: stringArg()
+        }, 
+        resolve: async (_, args) => {
+          return prisma.profile.create({
+            data: {
+              bio: args.bio,
+              user: {
+                connect: {
+                  email: args.email || undefined,
+                }
+              }
+            }
+          })
+        }
+      })
+
     t.nullable.field('publish', {
       type: 'Post',
       args: {
@@ -174,7 +221,7 @@ const Mutation = objectType({
 })
 
 export const schema = makeSchema({
-  types: [Query, Mutation, Post, User, GQLDate],
+  types: [Query, Mutation, Post, User, Profile, GQLDate],
   outputs: {
     typegen: path.join(process.cwd(), 'generated/nexus-typegen.ts'),
     schema: path.join(process.cwd(), 'generated/schema.graphql'),

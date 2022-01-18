@@ -8,6 +8,7 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 scalar DateTime
 
 type Mutation {
+  addProfileForUser(bio: String, email: String): Profile
   createDraft(authorEmail: String, content: String, title: String!): Post
   deletePost(postId: String): Post
   publish(postId: String): Post
@@ -20,6 +21,12 @@ type Post {
   id: Int
   published: Boolean
   title: String
+}
+
+type Profile {
+  bio: String
+  id: Int!
+  user: User
 }
 
 type Query {
@@ -35,5 +42,6 @@ type User {
   name: String
   password: String
   posts: [Post]
+  profile: Profile
   role: String
 }
