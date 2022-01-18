@@ -43,8 +43,8 @@ export default NextAuth({
             select: {
               id: true,
               email: true,
-              // password: true,
-              name: true,
+              password: true,
+              // name: true,
               role: true,
             },
           });
