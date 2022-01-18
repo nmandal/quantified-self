@@ -38,16 +38,15 @@ const AppBar = () => {
 							</div>
 						</div>
 
-            <Link href="/signup">
-						<div
-							title='Gluten Free'
-							className='w-10 h-10 bg-zinc-200 dark:bg-zinc-800 bg-cover bg-center rounded-full shadow-inner'
-							style={{
-								backgroundImage:
-									'url(https://images.unsplash.com/photo-1612480797665-c96d261eae09?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80)',
-							}}
-               />
-            </Link>
+            		<Link href="/sign-in">
+						<span
+							title=''
+							className='inline-block rounded-full overflow-hidden w-8 h-8 bg-zinc-200 dark:bg-zinc-800 bg-cover bg-center rounded-full shadow-inner'>
+							<svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+							</svg>
+						</span>
+            		</Link>
 					</nav>
 				</div>
 			</header>

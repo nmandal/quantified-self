@@ -19,12 +19,22 @@ const DraftsQuery = gql`
 `
 
 const Post = ({ post }) => (
+  
   <Link href="/p/[id]" as={`/p/${post.id}`}>
     <a>
-      <h2>{post.title}</h2>
-      <small>By {post.author ? post.author.name : "Unknown Author"}</small>
-      <p>{post.content}</p>
-    </a>
+    <li className="py-4">
+      <div className="flex space-x-3">
+        <div className="flex-1 space-y-1">
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-medium">{post.title} by {post.author ? post.author.name : "Unknown Author"}</h3>
+          </div>
+          <p className="text-sm text-gray-500">
+            {post.content}
+          </p>
+        </div>
+      </div>
+    </li>
+    </a>    
   </Link>
 )
 
@@ -34,7 +44,7 @@ const Drafts = () => {
   })
 
   if (loading) {
-    return <div>Loading ...</div>
+    return <Page>Loading ...</Page>
   }
   if (error) {
     return <div>Error: {error.message}</div>
@@ -42,15 +52,15 @@ const Drafts = () => {
 
   return (
     <Page>
-      <div className="page">
-        <h1>Drafts</h1>
-        <main>
+      <div>
+      <h3 className="leading-6 font-medium text-xl font-semibold text-zinc-800 dark:text-zinc-200">Drafts</h3>
+        <ul role="list" className="divide-y divide-gray-200">
           {data.drafts.map(post => (
-            <div key={post.id} className="post">
+            <div key={post.id}>
               <Post post={post} />
             </div>
           ))}
-        </main>
+        </ul>
       </div>
     </Page>
   )

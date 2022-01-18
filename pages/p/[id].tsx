@@ -59,7 +59,7 @@ function Post() {
 
   if (loading) {
     console.log("loading")
-    return <div>Loading ...</div>
+    return <Page>Loading ...</Page>
   }
   if (error) {
     console.log("error")
