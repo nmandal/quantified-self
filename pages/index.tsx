@@ -21,10 +21,10 @@ const Home = () => {
 				</p>
 				<br />
         <p className='text-zinc-600 dark:text-zinc-400'>
-          Quantified Self leverages data aggregators such as 
-          <a href='https://www.apple.com/ios/health/' className='underline'>Apple Health</a>,
-          <a href='https://ouraring.com' className='underline'>Oura</a>, and
-          <a href='https://www.levelshealth.com' className='underline'>Levels</a>
+          Quantified Self leverages data aggregators such as {' '}
+          <a href='https://www.apple.com/ios/health/' className='underline'>Apple Health</a>,{' '}
+          <a href='https://ouraring.com' className='underline'>Oura</a>, and {' '}
+          <a href='https://www.levelshealth.com' className='underline'>Levels</a> {' '}
           to paint a more holistic picture of your healthspan.
 				</p>
 			</div>
