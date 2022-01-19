@@ -10,29 +10,10 @@ import {
   stringArg,
 } from 'nexus'
 import path from 'path'
-import cors from 'micro-cors' 
+import cors from 'micro-cors'
 import prisma from '../../lib/prisma'
 
 export const GQLDate = asNexusMethod(DateTimeResolver, 'date')
-
-
-const Profile = objectType({
-  name: 'Profile',
-  definition(t) {
-    t.nonNull.string('id')
-    t.string('bio')
-    t.field('user', {
-      type: 'User',
-      resolve: (parent) => {
-        return prisma.profile
-          .findUnique({
-            where: { id: parent.id || undefined },
-          })
-          .user()
-      },
-    })
-  },
-})
 
 const User = objectType({
   name: 'User',
@@ -40,8 +21,6 @@ const User = objectType({
     t.string('id')
     t.string('name')
     t.string('email')
-    t.string('password')
-    t.string('role')
     t.list.field('posts', {
       type: 'Post',
       resolve: (parent) =>
@@ -51,14 +30,6 @@ const User = objectType({
           })
           .posts(),
     })
-    t.field('profile', {
-        type: 'Profile',
-        resolve: (parent) => {
-          return prisma.user.findUnique({
-            where: { id: parent.id }
-          }).profile()
-        }
-      })
   },
 })
 
@@ -136,21 +107,21 @@ const Query = objectType({
 const Mutation = objectType({
   name: 'Mutation',
   definition(t) {
-    // t.field('signupUser', {
-    //   type: 'User',
-    //   args: {
-    //     name: stringArg(),
-    //     email: nonNull(stringArg()),
-    //   },
-    //   resolve: (_, { name, email }, ctx) => {
-    //     return prisma.user.create({
-    //       data: {
-    //         name,
-    //         email,
-    //       },
-    //     })
-    //   },
-    // })
+    t.field('signupUser', {
+      type: 'User',
+      args: {
+        name: stringArg(),
+        email: nonNull(stringArg()),
+      },
+      resolve: (_, { name, email }, ctx) => {
+        return prisma.user.create({
+          data: {
+            name,
+            email,
+          },
+        })
+      },
+    })
 
     t.nullable.field('deletePost', {
       type: 'Post',
@@ -185,26 +156,6 @@ const Mutation = objectType({
       },
     })
 
-    t.field('addProfileForUser', {
-        type: 'Profile',
-        args: {
-          email: stringArg(),
-          bio: stringArg()
-        }, 
-        resolve: async (_, args) => {
-          return prisma.profile.create({
-            data: {
-              bio: args.bio,
-              user: {
-                connect: {
-                  email: args.email || undefined,
-                }
-              }
-            }
-          })
-        }
-      })
-
     t.nullable.field('publish', {
       type: 'Post',
       args: {
@@ -221,7 +172,7 @@ const Mutation = objectType({
 })
 
 export const schema = makeSchema({
-  types: [Query, Mutation, Post, User, Profile, GQLDate],
+  types: [Query, Mutation, Post, User, GQLDate],
   outputs: {
     typegen: path.join(process.cwd(), 'generated/nexus-typegen.ts'),
     schema: path.join(process.cwd(), 'generated/schema.graphql'),

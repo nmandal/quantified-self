@@ -1,55 +1,12 @@
 import Page from "../components/Page"
 import Link from "next/link"
 import gql from "graphql-tag"
-import { useQuery } from "@apollo/client"
+import React, { useState } from "react"
+import { useMutation } from "@apollo/client"
+import Router, { useRouter } from "next/router"
 
-const FeedQuery = gql`
-  query FeedQuery {
-    feed {
-      id
-      title
-      content
-      published
-      author {
-        id
-        name
-      }
-    }
-  }
-`
 
-const Post = ({ post }) => (
-  
-  <Link href="/p/[id]" as={`/p/${post.id}`}>
-    <a>
-    <li className="py-4">
-      <div className="flex space-x-3">
-        <div className="flex-1 space-y-1">
-          <div className="flex items-center justify-between">
-            <h3 className="text-sm font-medium">{post.title} by {post.author.name}</h3>
-          </div>
-          <p className="text-sm text-gray-500">
-            {post.content}
-          </p>
-        </div>
-      </div>
-    </li>
-    </a>    
-  </Link>
-)
-
-const Blog = () => {
-  const { loading, error, data } = useQuery(FeedQuery, {
-    fetchPolicy: "cache-and-network",
-  })
-
-  if (loading) {
-    return <Page>Loading ...</Page>
-  }
-  if (error) {
-    return <div>Error: {error.message}</div>
-  }
-
+const Home = () => {
   return (
     <Page>
       <div>
@@ -64,19 +21,24 @@ const Blog = () => {
 				</p>
 				<br />
 			</div>
-        <h3>Posts</h3>
-        <ul role="list" className="divide-y divide-gray-200">
-          {data.feed.map(post => (
-            <div>
-              <Post post={post} />
-            </div>
-          ))}
-        </ul>
-        <div>
-    </div>
+
+      <br />
+
+      <div>
+        <div className="max-w-2xl mx-auto text-center ">
+        <Link href="/early-access">
+          <a
+            className="mt-2 w-full inline-flex items-center justify-center px-5 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium rounded-md bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:w-auto"
+          >
+            Get early access
+          </a>
+          </Link>
+        </div>
+      </div>
+
       </div>
     </Page>
   )
 }
 
-export default Blog
+export default Home
