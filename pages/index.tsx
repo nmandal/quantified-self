@@ -17,9 +17,16 @@ const Home = () => {
 			<div className='mt-2'>
 				<p className='text-zinc-600 dark:text-zinc-400'>
           We track our workouts, sleep, and meals, but we don't put the data to work.
-          It's time to own our data and leverage it to make better decisions for our health.
+          It's time to own our data and use it to make better decisions for our health.
 				</p>
 				<br />
+        <p className='text-zinc-600 dark:text-zinc-400'>
+          Quantified Self leverages data aggregators such as 
+          <a href='https://www.apple.com/ios/health/' className='underline'>Apple Health</a>,
+          <a href='https://ouraring.com' className='underline'>Oura</a>, and
+          <a href='https://www.levelshealth.com' className='underline'>Levels</a>
+          to paint a more holistic picture of your healthspan.
+				</p>
 			</div>
 
       <br />
