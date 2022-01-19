@@ -55,6 +55,8 @@ export interface NexusGenObjects {
     email?: string | null; // String
     id?: string | null; // String
     name?: string | null; // String
+    password?: string | null; // String
+    role?: string | null; // String
   }
 }
 
@@ -92,7 +94,9 @@ export interface NexusGenFieldTypes {
     email: string | null; // String
     id: string | null; // String
     name: string | null; // String
+    password: string | null; // String
     posts: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
+    role: string | null; // String
   }
 }
 
@@ -120,7 +124,9 @@ export interface NexusGenFieldTypeNames {
     email: 'String'
     id: 'String'
     name: 'String'
+    password: 'String'
     posts: 'Post'
+    role: 'String'
   }
 }
 
