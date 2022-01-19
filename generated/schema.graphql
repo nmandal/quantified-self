@@ -12,7 +12,6 @@ type Mutation {
   createDraft(authorEmail: String, content: String, title: String!): Post
   deletePost(postId: String): Post
   publish(postId: String): Post
-  signupUser(email: String!, name: String): User
 }
 
 type Post {

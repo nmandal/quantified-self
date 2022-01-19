@@ -80,7 +80,6 @@ export interface NexusGenFieldTypes {
     createDraft: NexusGenRootTypes['Post'] | null; // Post
     deletePost: NexusGenRootTypes['Post'] | null; // Post
     publish: NexusGenRootTypes['Post'] | null; // Post
-    signupUser: NexusGenRootTypes['User'] | null; // User
   }
   Post: { // field return type
     author: NexusGenRootTypes['User'] | null; // User
@@ -117,7 +116,6 @@ export interface NexusGenFieldTypeNames {
     createDraft: 'Post'
     deletePost: 'Post'
     publish: 'Post'
-    signupUser: 'User'
   }
   Post: { // field return type name
     author: 'User'
@@ -164,10 +162,6 @@ export interface NexusGenArgTypes {
     }
     publish: { // args
       postId?: string | null; // String
-    }
-    signupUser: { // args
-      email: string; // String!
-      name?: string | null; // String
     }
   }
   Query: {

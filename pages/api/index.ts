@@ -136,21 +136,21 @@ const Query = objectType({
 const Mutation = objectType({
   name: 'Mutation',
   definition(t) {
-    t.field('signupUser', {
-      type: 'User',
-      args: {
-        name: stringArg(),
-        email: nonNull(stringArg()),
-      },
-      resolve: (_, { name, email }, ctx) => {
-        return prisma.user.create({
-          data: {
-            name,
-            email,
-          },
-        })
-      },
-    })
+    // t.field('signupUser', {
+    //   type: 'User',
+    //   args: {
+    //     name: stringArg(),
+    //     email: nonNull(stringArg()),
+    //   },
+    //   resolve: (_, { name, email }, ctx) => {
+    //     return prisma.user.create({
+    //       data: {
+    //         name,
+    //         email,
+    //       },
+    //     })
+    //   },
+    // })
 
     t.nullable.field('deletePost', {
       type: 'Post',

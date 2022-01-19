@@ -24,15 +24,15 @@ import { useMutation } from "@apollo/client"
 
 import { LockClosedIcon } from '@heroicons/react/solid'
 
-const SignupMutation = gql`
-  mutation SignupMutation($name: String, $email: String!) {
-    signupUser(name: $name, email: $email) {
-      id
-      name
-      email
-    }
-  }
-`
+// const SignupMutation = gql`
+//   mutation SignupMutation($name: String, $email: String!) {
+//     signupUser(name: $name, email: $email) {
+//       id
+//       name
+//       email
+//     }
+//   }
+// `
 
 function Signup({ csrfToken }) {
   const [isSubmitting, setSubmitting] = React.useState(false);
@@ -62,7 +62,7 @@ function Signup({ csrfToken }) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const [signup] = useMutation(SignupMutation)
+  // const [signup] = useMutation(SignupMutation)
 
   return (
     <Page>
