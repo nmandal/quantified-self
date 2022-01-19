@@ -7,9 +7,6 @@ import { ThemeProvider } from 'next-themes'
 import React from "react";
 import type { ExtendedAppProps } from "../lib/types";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { SessionProvider } from "next-auth/react";
-
-import WithAuth from "../lib/auth/WithAuth";
 
 export const queryClient = new QueryClient();
 
@@ -30,17 +27,11 @@ function MyApp({
         defaultTheme='system'
         disableTransitionOnChange
       >
-        <SessionProvider session={session} refetchInterval={5 * 60}>
+
           <QueryClientProvider client={queryClient}>
-            {Component.auth ? (
-              <WithAuth options={Component.auth}>
-                <Component {...pageProps} />
-              </WithAuth>
-            ) : (
               <Component {...pageProps} />
-            )}
             </QueryClientProvider>
-          </SessionProvider>
+
       </ThemeProvider>
     </ApolloProvider>
 
