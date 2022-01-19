@@ -18,17 +18,15 @@ export const GQLDate = asNexusMethod(DateTimeResolver, 'date')
 const User = objectType({
   name: 'User',
   definition(t) {
-    t.string('id')
+    t.int('id')
     t.string('name')
     t.string('email')
-    t.string('password')
-    t.string('role')
     t.list.field('posts', {
       type: 'Post',
       resolve: (parent) =>
         prisma.user
           .findUnique({
-            where: { id: parent.id },
+            where: { id: Number(parent.id) },
           })
           .posts(),
     })
@@ -38,7 +36,7 @@ const User = objectType({
 const Post = objectType({
   name: 'Post',
   definition(t) {
-    t.string('id')
+    t.int('id')
     t.string('title')
     t.nullable.string('content')
     t.boolean('published')
@@ -47,7 +45,7 @@ const Post = objectType({
       resolve: (parent) =>
         prisma.post
           .findUnique({
-            where: { id: parent.id },
+            where: { id: Number(parent.id) },
           })
           .author(),
     })
@@ -64,7 +62,7 @@ const Query = objectType({
       },
       resolve: (_, args) => {
         return prisma.post.findUnique({
-          where: { id: args.postId },
+          where: { id: Number(args.postId) },
         })
       },
     })
@@ -132,7 +130,7 @@ const Mutation = objectType({
       },
       resolve: (_, { postId }, ctx) => {
         return prisma.post.delete({
-          where: { id: postId },
+          where: { id: Number(postId) },
         })
       },
     })
@@ -165,7 +163,7 @@ const Mutation = objectType({
       },
       resolve: (_, { postId }, ctx) => {
         return prisma.post.update({
-          where: { id: postId },
+          where: { id: Number(postId) },
           data: { published: true },
         })
       },

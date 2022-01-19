@@ -46,17 +46,15 @@ export interface NexusGenObjects {
   Mutation: {};
   Post: { // root type
     content?: string | null; // String
-    id?: string | null; // String
+    id?: number | null; // Int
     published?: boolean | null; // Boolean
     title?: string | null; // String
   }
   Query: {};
   User: { // root type
     email?: string | null; // String
-    id?: string | null; // String
+    id?: number | null; // Int
     name?: string | null; // String
-    password?: string | null; // String
-    role?: string | null; // String
   }
 }
 
@@ -80,7 +78,7 @@ export interface NexusGenFieldTypes {
   Post: { // field return type
     author: NexusGenRootTypes['User'] | null; // User
     content: string | null; // String
-    id: string | null; // String
+    id: number | null; // Int
     published: boolean | null; // Boolean
     title: string | null; // String
   }
@@ -92,11 +90,9 @@ export interface NexusGenFieldTypes {
   }
   User: { // field return type
     email: string | null; // String
-    id: string | null; // String
+    id: number | null; // Int
     name: string | null; // String
-    password: string | null; // String
     posts: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
-    role: string | null; // String
   }
 }
 
@@ -110,7 +106,7 @@ export interface NexusGenFieldTypeNames {
   Post: { // field return type name
     author: 'User'
     content: 'String'
-    id: 'String'
+    id: 'Int'
     published: 'Boolean'
     title: 'String'
   }
@@ -122,11 +118,9 @@ export interface NexusGenFieldTypeNames {
   }
   User: { // field return type name
     email: 'String'
-    id: 'String'
+    id: 'Int'
     name: 'String'
-    password: 'String'
     posts: 'Post'
-    role: 'String'
   }
 }
 
