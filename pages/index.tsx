@@ -27,6 +27,10 @@ const Home = () => {
           <a href='https://www.levelshealth.com' className='underline'>Levels</a> {' '}
           to paint a more holistic picture of your healthspan.
 				</p>
+        <br />
+        <p className='text-zinc-600 dark:text-zinc-400'>
+          Read more about how we're thinking about health and longevity <a href='https://www.nickmandal.com/writing/health-framework' className='underline'>here</a>.
+        </p>
 			</div>
 
       <br />
